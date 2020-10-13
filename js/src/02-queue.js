@@ -25,7 +25,21 @@ const queue = (elements = []) => {
         return items[0];
     };
 
-    return { count, clear, peek, enqueue, dequeue, isEmpty };
+    const iterator = () => {
+        let i = -1;
+
+        return {
+            next: () => ({
+                value: items[++i],
+                done: i >= count()
+            })
+        };
+    };
+
+    return {
+        [Symbol.iterator]: iterator,
+        count, clear, peek, enqueue, dequeue, isEmpty
+    };
 }
 
 module.exports = queue;

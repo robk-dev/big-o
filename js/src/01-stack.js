@@ -27,8 +27,23 @@ const stack = (elements = []) => {
         items = [];
     };
 
+    const iterator = function () {
+        let i = -1;
 
-    return { push, pop, top, isEmpty, count, clear };
-}
+        return {
+            next: () => ({
+                value: items[++i],
+                done: i >= count()
+            })
+        };
+    };
+
+
+    return {
+        [Symbol.iterator]: iterator,
+        push, pop, top, isEmpty, count, clear,
+
+    };
+};
 
 module.exports = stack;

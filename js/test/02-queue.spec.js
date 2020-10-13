@@ -45,4 +45,16 @@ describe("Queue test suite:", () => {
         expect(num).toBe(0);
     });
 
+    test("Queue should be iterable and order preserved", () => {
+        const arr = [0, 1, 2, 3];
+        const q = queue(arr);
+
+        const new_arr = []
+
+        for (k of q) {
+            new_arr.push(k);
+        }
+
+        expect(new_arr).toEqual(arr);
+    });
 });

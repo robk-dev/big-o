@@ -45,4 +45,17 @@ describe("Stack test suite:", () => {
         expect(s.count()).toBe(0);
         expect(s.isEmpty()).toBe(true);
     });
+
+    test("Stack should be iterable and order preserved", () => {
+        const arr = [0, 1, 2, 3];
+        const s = stack(arr);
+
+        const new_arr = []
+
+        for (k of s) {
+            new_arr.push(k);
+        }
+
+        expect(new_arr).toEqual(arr);
+    });
 });

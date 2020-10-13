@@ -124,7 +124,20 @@ const linked_list = () => {
         return str;
     };
 
-    return { getHead, isEmpty, count, append, insertAt, remove, removeAt, indexOf, toString }
-}
+    const iterator = () => {
+        let temp = { next: head };
+        return {
+            next: () => ({
+                value: temp = temp.next,
+                done: !temp
+            })
+        };
+    };
+
+    return {
+        [Symbol.iterator]: iterator,
+        getHead, isEmpty, count, append, insertAt, remove, removeAt, indexOf, toString
+    };
+};
 
 module.exports = linked_list;

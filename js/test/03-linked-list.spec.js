@@ -110,6 +110,21 @@ describe("Linked List Suite:", () => {
 
         expect(ll.toString()).toEqual(str);
     });
+
+    test("Linked list should be iterable and order preserved", () => {
+        const ll = linked_list();
+        const arr = [0, 1, 2, 3];
+
+        arr.forEach(item => ll.append(item));
+
+        const new_arr = []
+
+        for (node of ll) {
+            new_arr.push(node.get());
+        }
+
+        expect(new_arr).toEqual(arr);
+    });
 });
 
 
