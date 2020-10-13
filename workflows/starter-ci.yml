@@ -16,6 +16,6 @@ jobs:
           node-version: 12 # ${{ matrix.node-version }}
 
       - name: Install jest
-        run: npm i
+        run: npm ci
       - name: Test
         run: npm test
