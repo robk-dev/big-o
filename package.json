@@ -1,0 +1,23 @@
+{
+  "name": "big-o",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose --coverage ./js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robk-dev/big-o.git"
+  },
+  "keywords": [],
+  "author": "robk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/robk-dev/big-o/issues"
+  },
+  "homepage": "https://github.com/robk-dev/big-o#readme",
+  "devDependencies": {
+    "jest": "^26.5.3"
+  }
+}
