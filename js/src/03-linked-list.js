@@ -42,30 +42,30 @@ const linked_list = () => {
     };
 
     const insertAt = function (element, pos) {
-        if (pos >= 0 && pos <= length) {
-            const node = new Node(element);
-            let temp = head;
-            let prev;
-            let index = 0;
-
-            if (pos === 0) {
-                node.next = temp;
-                head = node;
-
-            } else {
-                while (index++ < pos) {
-                    prev = temp;
-                    temp = temp.next;
-                }
-                node.next = temp;
-                prev.next = node;
-            }
-
-            length++;
-            return true;
-        } else {
+        if (pos < 0 || pos > length) {
             return false;
         }
+
+        const node = new Node(element);
+        let temp = head;
+        let prev;
+        let index = 0;
+
+        if (pos === 0) {
+            node.next = temp;
+            head = node;
+
+        } else {
+            while (index++ < pos) {
+                prev = temp;
+                temp = temp.next;
+            }
+            node.next = temp; // swap
+            prev.next = node;
+        }
+
+        length++;
+        return true;
     };
 
     const removeAt = function (pos) {
@@ -77,7 +77,6 @@ const linked_list = () => {
         let prev;
         let index = 0;
 
-
         if (pos === 0) {
             head = temp.next;
         } else {
@@ -86,7 +85,7 @@ const linked_list = () => {
                 temp = temp.next;
             }
 
-            prev.next = temp.next;
+            prev.next = temp.next; // swap
         }
 
         length--;

@@ -1,4 +1,4 @@
-const queue = (elements = []) => {
+const Queue = (elements = []) => {
     let items = [...elements];
 
     const isEmpty = function () {
@@ -42,4 +42,4 @@ const queue = (elements = []) => {
     };
 }
 
-module.exports = queue;
+module.exports = Queue;

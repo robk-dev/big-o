@@ -1,4 +1,4 @@
-const stack = (elements = []) => {
+const Stack = (elements = []) => {
 
     let items = [...elements];
 
@@ -38,7 +38,6 @@ const stack = (elements = []) => {
         };
     };
 
-
     return {
         [Symbol.iterator]: iterator,
         push, pop, top, isEmpty, count, clear,
@@ -46,4 +45,4 @@ const stack = (elements = []) => {
     };
 };
 
-module.exports = stack;
+module.exports = Stack;

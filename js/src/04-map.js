@@ -1,4 +1,4 @@
-const map = (elems = {}) => {
+const Map = (elems = {}) => {
     let items = { ...elems };
 
     const has = function (key) {
@@ -9,7 +9,7 @@ const map = (elems = {}) => {
         items[key] = value;
     };
 
-    const remove = (key) => {
+    const remove = function (key) {
         if (has(key)) {
             delete items[key];
             return true;
@@ -55,8 +55,9 @@ const map = (elems = {}) => {
 
     return {
         [Symbol.iterator]: iterator,
-        has, set, delete: remove, get, keys, values, clear, size, values, entries
+        delete: remove,
+        has, set, get, keys, values, clear, size, entries
     };
-}
+};
 
-module.exports = map;
+module.exports = Map;
