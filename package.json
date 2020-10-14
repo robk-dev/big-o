@@ -19,5 +19,8 @@
   "homepage": "https://github.com/robk-dev/big-o#readme",
   "devDependencies": {
     "jest": "^26.5.3"
+  },
+  "dependencies": {
+    "deep-equal": "^2.0.4"
   }
 }

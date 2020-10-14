@@ -1,3 +1,5 @@
+const deep_equal = require('deep-equal');
+
 const Node = function (element) {
     this.element = element;
     this.next = null;
@@ -102,7 +104,7 @@ const linked_list = () => {
         let index = 0;
 
         while (temp) {
-            if (element === temp.element) {
+            if (deep_equal(element, temp.element)) {
                 return index;
             }
             index++;

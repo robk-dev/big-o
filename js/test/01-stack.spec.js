@@ -31,9 +31,9 @@ describe("Stack test suite:", () => {
     });
 
     test("Popping an element off the stack should return the last number and decrease the count", () => {
-        const s = stack([9]);
+        const s = stack([1, 9]);
         const num = s.pop()
-        expect(s.count()).toBe(0);
+        expect(s.count()).toBe(1);
         expect(num).toBe(9);
     });
 
