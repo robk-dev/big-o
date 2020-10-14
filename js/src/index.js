@@ -13,9 +13,3 @@ module.exports = {
     HashTable,
     LinkedList
 };
-
-
-const hMap = HashMap();
-
-hMap.set(1, 2);
-console.log(hMap)

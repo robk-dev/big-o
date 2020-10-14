@@ -1,6 +1,8 @@
 const hashTable = require("../src/05-hash-table");
 
 describe("HashTable Suite:", () => {
+    const strings = ['apple', 'banana', 'plane', 'milk', 'person', 'man', 'woman', 'camera', 'tv'];
+
     test("table.get() should return null if no matches", () => {
         const table = hashTable();
         expect(table.get('something')).toEqual(null);
@@ -15,18 +17,37 @@ describe("HashTable Suite:", () => {
         expect(table.get('test')).toEqual(value);
     });
 
-    test("Should deal with collisions as long as keys are unique", () => {
-        const table = hashTable(2);
-
-        const strings = ['apple', 'banana', 'plane', 'milk', 'person', 'man', 'woman', 'camera', 'tv'];
+    test("count() should return number of items in table", () => {
+        const table = hashTable();
         strings.forEach(str => table.set(str, str));
 
-        strings.forEach(str => expect(table.get(str)).toEqual(str));
+        expect(strings.length).toEqual(table.count());
     });
 
+    test("Should resize when past some threshold", () => {
+        const table = hashTable(2, 0.5);
+        const size = table.size()
+        strings.forEach(str => table.set(str, str));
 
-    // test("Should resize when past some threshold", () => {
-    //     const table = hashTable();
-    //     // and now I need to keep track of number of items..
+        expect(size).toBeLessThan(table.size());
+    });
+
+    test("table.delete() should delete item; true on success, false on fail", () => {
+        const table = hashTable();
+
+        table.set(1, 1);
+        expect(table.get(1)).toBe(1);
+        expect(table.delete(1)).toEqual(true);
+        expect(table.count()).toBe(0);
+        expect(table.delete(1)).toEqual(false);
+    });
+
+    // test("Should deal with collisions; will allow duplicates", () => {
+    //     const table = hashTable(2);
+
+    //     strings.forEach(str => table.set(str, str));
+    //     console.log(table.getTable());
+    //     strings.forEach(str => expect(table.get(str)).toEqual(str));
     // });
+
 });
