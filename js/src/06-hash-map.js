@@ -89,3 +89,5 @@ const HashMap = () => {
 }
 
 module.exports = HashMap;
+
+// TODO: compare to 2D Map/JSON for efficiency
