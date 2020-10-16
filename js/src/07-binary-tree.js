@@ -178,7 +178,7 @@ const Tree = () => {
         if (!root) {
             root = new_node;
             nodes.push(new_node);
-            return;
+            return true;
         }
 
         let temp = root;
@@ -186,7 +186,7 @@ const Tree = () => {
 
         while (++level > -1) {
             const comparison = compare(key, temp.key);
-            if (comparison === 0) return;
+            if (comparison === 0)  return false;
 
             paths[level] = temp;
 
@@ -209,11 +209,13 @@ const Tree = () => {
         }
 
         rebalance(paths, level);
+        return true;
     };
 
     const get = (key) => {
         let temp = root;
         if (!temp) return null;
+
         while (true) {
             const comparison = compare(key, temp.key);
             if (comparison === 0) return temp.value;

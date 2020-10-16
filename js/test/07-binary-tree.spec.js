@@ -12,6 +12,12 @@ describe("Binary Tree Suite:", () => {
         expect(tree.size()).toEqual(0);
     });
 
+    test("tree.add() should return true on success, false on fail/duplicate keys", () => {
+        const tree = BinaryTree();
+        expect(tree.add(1, 1)).toEqual(true);
+        expect(tree.add(1, 1)).toEqual(false);
+    });
+
     test("tree.add() should work and increase tree size", () => {
         const key = 'key';
         const value = 999;
@@ -23,15 +29,16 @@ describe("Binary Tree Suite:", () => {
         expect(tree.size()).toEqual(1);
     });
 
-    // test("tree.get(key) should return value if it exists; else null", () => {
-    //     const tree = BinaryTree();
-    //     random_order.forEach(v => {
-    //         tree.add(v);
-    //     });
-    //     expect(tree.get(1)).toEqual(1);
-    //     expect(tree.get(30)).toEqual(30);
-    //     expect(tree.get('nothing')).toEqual(null);
-    // });
+    test("tree.get(key) should return value if it exists; else null", () => {
+        const tree = BinaryTree();
+        random_order.forEach(v => {
+            tree.add(v, v);
+        });
+        expect(tree.get(1)).toEqual(1);
+        expect(tree.get(30)).toEqual(30);
+        expect(tree.get(999)).toEqual(null);
+        expect(tree.get(-1)).toEqual(null);
+    });
 
     test("tree.traverse().in_order() should return values 1 by 1 in ascending order", () => {
         const tree = BinaryTree();
@@ -76,6 +83,35 @@ describe("Binary Tree Suite:", () => {
             tree.add(v);
         });
 
+        const str = tree.print();
+        console.log('**************TREE****************\n', str)
+        expect(typeof str).toEqual('string');
+        expect(str.length).toBeGreaterThan(5);
+    });
+
+    test("tree.traverse().print() should print a tree //needs work", () => {
+        const tree = BinaryTree();
+
+        in_order.forEach(v => {
+            tree.add(v);
+        });
+
+        const str = tree.print();
+        console.log('**************TREE****************\n', str)
+        expect(typeof str).toEqual('string');
+        expect(str.length).toBeGreaterThan(5);
+    });
+
+    test("tree.getRoot() to return current root //needs work", () => {
+        const tree = BinaryTree();
+
+
+        const t = BinaryTree();
+        tree.add(0, 0);
+        tree.add(1, 1);
+        tree.add(2, 2);
+
+        console.log(tree.getRoot());
         const str = tree.print();
         console.log('**************TREE****************\n', str)
         expect(typeof str).toEqual('string');
