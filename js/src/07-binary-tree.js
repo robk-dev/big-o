@@ -6,7 +6,6 @@ const max_level = (root) => {
     return Math.max(max_level(root.left), max_level(root.right)) + 1;
 }
 
-
 const skew = (node) => {
     if (node.left && node.left.level === node.level) {
         let temp = node;
@@ -92,7 +91,7 @@ const levels = (_node, level = 0, aggregator = []) => {
     return aggregator;
 }
 
-const traverse = (root) => {
+const _traverse = (root) => {
     const in_order = (_node, callback) => {
         if (_node) {
             in_order(_node.left, callback);
@@ -178,6 +177,7 @@ const Tree = () => {
 
         if (!root) {
             root = new_node;
+            nodes.push(new_node);
             return;
         }
 
@@ -212,16 +212,38 @@ const Tree = () => {
     };
 
     const get = (key) => {
-        return nodes[key];
-    };
+        let temp = root;
+        if (!temp) return null;
+        while (true) {
+            const comparison = compare(key, temp.key);
+            if (comparison === 0) return temp.value;
+
+            if (comparison < 0) {
+                if (!temp.left) {
+                    break;
+                }
+                temp = temp.left;
+            } else {
+                if (!temp.right) {
+                    break;
+                }
+                temp = temp.right;
+            }
+        }
+        return null;
+    }
 
     return {
-        print: function (level) {
-            return print_tree(root, this, level);
-        },
-        add, get, traverse,
+        add,
+        get,
         getRoot: () => root,
-        size: () => nodes.length
+        size: () => nodes.length,
+        traverse: () => {
+            return _traverse(root);
+        },
+        print: function (max_recurse) {
+            return print_tree(root, this, max_recurse);
+        }
     };
 };
 
@@ -232,3 +254,5 @@ const get_spaces = (count) => {
 
     return str;
 }
+
+module.exports = Tree;

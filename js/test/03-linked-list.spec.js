@@ -71,7 +71,7 @@ describe("Linked List Suite:", () => {
     });
 
 
-    test("insertAt() should return true on success, false otherwise", () => {
+    test("insertAt() should return true on success; else false", () => {
         const ll = linked_list();
 
         expect(ll.insertAt(5, 2)).toBe(false);

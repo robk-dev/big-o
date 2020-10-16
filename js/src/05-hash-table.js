@@ -2,7 +2,7 @@ const { hashStringToNum } = require('./05-hash-string');
 const LinkedList = require('./03-linked-list');
 
 // hash table with arrays
-const HashTable = (num_buckets = 10000, resize_percent = 0.8) => {
+const HashTable = (num_buckets = 1000, resize_percent = 0.8) => {
     let buckets = new Array(num_buckets);
     let list = LinkedList();;
 
