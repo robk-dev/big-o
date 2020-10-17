@@ -33,6 +33,14 @@ describe("HashMap Suite:", () => {
     //     expect(() => map.set(key, value)).toThrow();
     // });
 
+    test("get() should return first element if duplicate keys", () => {
+        const map = HashMap();
+        const _key = { a: 'a', b: 'b' };
+        map.set(_key, _key);
+        map.set({ b: _key.b, ..._key }, 1);
+        expect(map.get(_key)).toEqual(_key)
+    });
+
     test("map.set(k, v) should increase count", () => {
         const map = HashMap();
         map.set(key, value)
@@ -50,6 +58,14 @@ describe("HashMap Suite:", () => {
 
         map.clear();
         expect(map.size()).toEqual(0);
+    });
+
+    test("map.remove(key) should return true on success, else false", () => {
+        const map = HashMap();
+        map.set(key, value)
+
+        expect(map.remove(key)).toEqual(true);
+        expect(map.remove(11)).toEqual(false);
     });
 
     test("map.remove(key) should decrease count", () => {
@@ -88,7 +104,7 @@ describe("HashMap Suite:", () => {
     test("Should deal with hash collisions", () => {
         const map = HashMap();
         const expected_length = 10000;
-        for (let i = 0; i <= expected_length -1; i++) {
+        for (let i = 0; i <= expected_length - 1; i++) {
             map.set(i, i);
         }
 

@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose --coverage ./js"
+    "test": "jest --verbose --coverage ./js",
+    "test:coverage": "jest --verbose --coverage ./js",
+    "test:badges": "npm run test:coverage  && jest-coverage-badges"
   },
   "repository": {
     "type": "git",
@@ -18,9 +20,17 @@
   },
   "homepage": "https://github.com/robk-dev/big-o#readme",
   "devDependencies": {
-    "jest": "^26.5.3"
+    "jest": "^26.5.3",
+    "jest-coverage-badges": "^1.1.2"
   },
   "dependencies": {
     "deep-equal": "^2.0.4"
+  },
+  "jest": {
+    "coverageReporters": [
+      "json-summary",
+      "text",
+      "lcov"
+    ]
   }
 }

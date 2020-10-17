@@ -10,7 +10,7 @@ const hashStringToNum = (s, table_size = 1000) => {
     return hash;
 }
 
-const hashStringToString = (s, table_size = 1000) => {
+const hashStringToString = (s, table_size = 1000 * 1000) => {
     return hashStringToNum(s, table_size).toString();
 }
 

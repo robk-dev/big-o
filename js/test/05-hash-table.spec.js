@@ -42,6 +42,11 @@ describe("HashTable Suite:", () => {
         expect(table.delete(1)).toEqual(false);
     });
 
+    test("table.delete() should delete item; true on success, false on fail", () => {
+        const table = hashTable();
+        expect(table.delete(1)).toEqual(false);
+    });
+
     // test("Should deal with collisions; will allow duplicates", () => {
     //     const table = hashTable(2);
 

@@ -22,7 +22,6 @@ const Stack = (elements = []) => {
         return items[items.length - 1];
     };
 
-
     const clear = function () {
         items = [];
     };
@@ -41,7 +40,6 @@ const Stack = (elements = []) => {
     return {
         [Symbol.iterator]: iterator,
         push, pop, top, isEmpty, count, clear,
-
     };
 };
 

@@ -1,14 +1,14 @@
 const my_map = require("../src/04-map");
 
 describe("Map Suite:", () => {
-    test("map.has() should return true if key is present; false otherwise", () => {
+    test("map.has() should return true if key is present; else false", () => {
         const map = my_map();
         map.set(1, 2)
         expect(map.has(1)).toBe(true);
         expect(map.has(2)).toBe(false);
     });
 
-    test("map.get() should return value if key is present; null otherwise", () => {
+    test("map.get() should return value if key is present; else null", () => {
         const map = my_map();
         map.set(1, 2)
         expect(map.get(1)).toBe(2);
@@ -37,7 +37,7 @@ describe("Map Suite:", () => {
         expect(map.entries()).toEqual(obj);
     });
 
-    test("map.delete() should return true if item deleted, false otherwise", () => {
+    test("map.delete() should return true if item deleted, else false", () => {
         const map = my_map();
         const obj = { 1: 'a', 'potato': 2, 'c': 'c' };
 

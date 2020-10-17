@@ -16,6 +16,10 @@ const HashMap = () => {
             return null;
         }
 
+        if (bucket.length === 1) {
+            return bucket[0][1];
+        }
+
         const value = bucket.find(([k, _v]) => deep_equal(k, key));
         return value && value[1];
     }
@@ -89,3 +93,5 @@ const HashMap = () => {
 }
 
 module.exports = HashMap;
+
+// TODO: compare to 2D Map/JSON for efficiency
