@@ -1,4 +1,4 @@
-const hashTable = require("../src/05-hash-table");
+const hashTable = require("../../src/data-structures/05-hash-table");
 
 describe("HashTable Suite:", () => {
     const strings = ['apple', 'banana', 'plane', 'milk', 'person', 'man', 'woman', 'camera', 'tv'];

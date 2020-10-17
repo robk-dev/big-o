@@ -1,4 +1,4 @@
-const HashMap = require("../src/06-hash-map");
+const HashMap = require("../../src/data-structures/06-hash-map");
 
 describe("HashMap Suite:", () => {
     const key = 'key';

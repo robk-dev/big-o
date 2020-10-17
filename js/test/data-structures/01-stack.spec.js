@@ -1,4 +1,4 @@
-const stack = require("../src/01-stack");
+const stack = require("../../src/data-structures/01-stack");
 
 describe("Stack test suite:", () => {
     test("New stack should be empty if no parameters passed", () => {

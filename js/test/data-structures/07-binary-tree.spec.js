@@ -1,4 +1,5 @@
-const BinaryTree = require("../src/07-binary-tree");
+const BinaryTree = require("../../src/data-structures/07-binary-tree");
+const max_level = require("../../src/data-structures/07-tree-helpers").max_level;
 
 describe("Binary Tree Suite:", () => {
     const random_order = [1, 5, 6, 2, 3, 4, 18, 19, 0, 20, 10, 11, 12, 16, 17, 28, 29, 30, 7, 8, 9, 22, 23, 24, 13, 14, 15, 25, 26, 27, 21];
@@ -94,6 +95,8 @@ describe("Binary Tree Suite:", () => {
 
         in_order.forEach(v => tree.add(v));
 
+        console.log('TREE :\n', tree.print());
+        console.log('max_level :\n', max_level(tree.getRoot()));
         const ordered = [];
         tree.traverse().pre_order(({ key }) => ordered.push(key))
         expect(ordered).toEqual(pre_order);
