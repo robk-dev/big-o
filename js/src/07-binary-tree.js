@@ -1,130 +1,24 @@
-
-const max_level = (root) => {
-    if (root == null)
-        return 0;
-
-    return Math.max(max_level(root.left), max_level(root.right)) + 1;
-}
-
-const skew = (node) => {
-    if (node.left && node.left.level === node.level) {
-        let temp = node;
-        node = node.left;
-        temp.left = node.right;
-        node.right = temp;
-        node.level++;
-    }
-    return node;
-}
-
-function split(node) {
-    if (node.right && node.right.right && node.right.right.level === node.level) {
-        let temp = node;
-        node = node.right;
-        temp.right = node.left;
-        node.left = temp;
-        node.level++;
-    }
-    return node;
-}
+const { compare,
+    print_tree,
+    skew, split,
+    get_min,
+    get_max,
+    _traverse,
+    get_successor
+} = require('./07-tree-helpers');
 
 const node = (key, value, level = 0, left = null, right = null) => {
     return {
         key,
         value,
         get: function () {
-            return { key: this.key, value: this.value }
+            return { key: this.key, value: this.value };
         },
         left,
         right,
-        level
-    };
-};
-
-const print_tree = (root, tree, max_recurse) => {
-    if (tree && tree.size() === 0)
-        return;
-
-    const nodes = levels(root);
-    const maxLevel = max_recurse || max_level(root);
-
-    let level = -1;
-    let output = '';
-
-    while (++level < nodes.length) {
-
-        const floor = maxLevel - level;
-        const left_indent = (floor * 2) + 1;
-        const space_between = Math.max(left_indent, 2)
-
-
-        let str = '';
-        let edges = '\n';
-        str += get_spaces(left_indent + space_between + 2);
-        edges += get_spaces(left_indent + space_between - 1);
-
-        nodes[level].forEach(node => {
-            const { key } = node.get();
-
-            str += key;
-            str += get_spaces(space_between);
-
-            edges += node.left ? '/' : ' ';
-            edges += get_spaces((space_between / 2) + 1);
-            edges += node.right ? '\\' : ' ';
-            edges += get_spaces(space_between / 2);
-        });
-        output += str + edges + '\n';
-    }
-    return output;
-}
-
-const levels = (_node, level = 0, aggregator = []) => {
-    aggregator[level] ?
-        aggregator[level].push(_node) :
-        aggregator[level] = [_node];
-
-    if (_node.left)
-        levels(_node.left, level + 1, aggregator);
-    if (_node.right)
-        levels(_node.right, level + 1, aggregator);
-    return aggregator;
-}
-
-const _traverse = (root) => {
-    const in_order = (_node, callback) => {
-        if (_node) {
-            in_order(_node.left, callback);
-            callback && callback(_node);
-            in_order(_node.right, callback);
-        }
-    }
-
-    const depth_first = (_node, callback) => {
-        if (_node) {
-            callback && callback(_node);
-            depth_first(_node.left, callback);
-            depth_first(_node.right, callback);
-        }
-    }
-
-    const breadth_first = (_node, callback) => {
-        if (_node) {
-            breadth_first(_node.left, callback);
-            breadth_first(_node.right, callback);
-            callback && callback(_node);
-        }
-    }
-
-    return {
-        in_order: (callback) => {
-            in_order(root, callback);
-        },
-        pre_order: (callback, cb) => {
-            depth_first(root, callback, cb);
-        },
-        post_order: (callback) => {
-            breadth_first(root, callback);
+        level,
+        isLeaf: function () {
+            return this.left === null && this.right === null;
         }
     };
 };
@@ -132,10 +26,6 @@ const _traverse = (root) => {
 const Tree = () => {
     let root = null;
     const nodes = [];
-
-    const compare = (a, b) => {
-        return a < b ? -1 : a > b ? 1 : 0;
-    }
 
     const rebalance = (paths, level) => {
         let rotated, node, parent, updated, noOps = 0;
@@ -169,7 +59,7 @@ const Tree = () => {
             if (!updated) noOps++;
             if (noOps === 2) break;
         }
-    }
+    };
 
     const add = (key, value) => {
         const new_node = node(key, value);
@@ -186,7 +76,7 @@ const Tree = () => {
 
         while (++level > -1) {
             const comparison = compare(key, temp.key);
-            if (comparison === 0)  return false;
+            if (comparison === 0) return false;
 
             paths[level] = temp;
 
@@ -212,49 +102,91 @@ const Tree = () => {
         return true;
     };
 
-    const get = (key) => {
+    const get_node = (key) => {
         let temp = root;
-        if (!temp) return null;
+        let parent = null;
+        if (!temp) return {};
 
         while (true) {
             const comparison = compare(key, temp.key);
-            if (comparison === 0) return temp.value;
+            if (comparison === 0) return { node: temp, parent, value: temp.value };
 
             if (comparison < 0) {
                 if (!temp.left) {
                     break;
                 }
+                parent = temp;
                 temp = temp.left;
             } else {
                 if (!temp.right) {
                     break;
                 }
+                parent = temp;
                 temp = temp.right;
             }
         }
-        return null;
+        return {};
     }
+
+    const get = (key) => {
+        const { value = null } = get_node(key);
+        return value;
+    }
+
+    const remove = (key) => {
+        let {
+            node: _node,
+            parent: _parent = {}
+        } = get_node(key);
+
+        if (!_node) {
+            return false;
+        }
+
+        if (_node.isLeaf()) {
+            if (_parent.left && _parent.left.key === _node.key) {
+                _parent.left = null;
+            } else if (_parent.right && _parent.right.key === _node.key) {
+                _parent.right = null;
+            }
+            _node = null;
+            return true;
+        }
+
+        if (_node.left === null) {
+            _node = _node.right;
+            return true;
+
+        } else if (_node.right === null) {
+            _node = _node.left;
+            return true;
+        }
+
+        // get the next biggest value by taking min value from right subtree
+        const { successor, parent } = get_successor(_node, _node.right);
+        _node.key = successor.key;
+        _node.value = successor.value;
+
+        if (parent && parent.key !== successor.key) {
+            parent.left = null;
+        }
+        else { _node.right = null; }
+        return true;
+    };
 
     return {
         add,
         get,
+        remove: (key) => remove(key),
         getRoot: () => root,
         size: () => nodes.length,
-        traverse: () => {
-            return _traverse(root);
-        },
+        traverse: (node) => _traverse(node || root),
         print: function (max_recurse) {
             return print_tree(root, this, max_recurse);
-        }
+        },
+        getMin: () => get_min(root),
+        getMax: () => get_max(root)
     };
 };
-
-const get_spaces = (count) => {
-    let str = '';
-    for (let i = 0; i < count; i++)
-        str += ' ';
-
-    return str;
-}
 
 module.exports = Tree;
