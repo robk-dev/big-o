@@ -1,4 +1,4 @@
-const linked_list = require("../src/03-linked-list");
+const linked_list = require("../../src/data-structures/03-linked-list");
 
 describe("Linked List Suite:", () => {
     test("New linked list should be empty", () => {

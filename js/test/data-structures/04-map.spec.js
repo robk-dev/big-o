@@ -1,4 +1,4 @@
-const my_map = require("../src/04-map");
+const my_map = require("../../src/data-structures/04-map");
 
 describe("Map Suite:", () => {
     test("map.has() should return true if key is present; else false", () => {

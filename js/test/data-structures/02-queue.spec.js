@@ -1,4 +1,4 @@
-const queue = require("../src/02-queue");
+const queue = require("../../src/data-structures/02-queue");
 describe("Queue test suite:", () => {
     test("New queue should be empty if no parameters passed", () => {
         const q = queue();
