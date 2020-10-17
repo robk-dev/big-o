@@ -95,8 +95,6 @@ describe("Binary Tree Suite:", () => {
 
         in_order.forEach(v => tree.add(v));
 
-        console.log('TREE :\n', tree.print());
-        console.log('max_level :\n', max_level(tree.getRoot()));
         const ordered = [];
         tree.traverse().pre_order(({ key }) => ordered.push(key))
         expect(ordered).toEqual(pre_order);
