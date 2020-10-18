@@ -55,7 +55,7 @@ const get_predeccessor = (root, _node) => {
         parent = temp;
         temp = temp.right
     }
-    return { successor: temp, parent };
+    return { predeccessor: temp, parent };
 }
 
 const get_max = (_node) => {

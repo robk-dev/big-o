@@ -169,8 +169,9 @@ const Tree = () => {
 
         if (parent && parent.key !== successor.key) {
             parent.left = null;
+        } else {
+            _node.right = null;
         }
-        else { _node.right = null; }
         return true;
     };
 

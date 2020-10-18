@@ -53,7 +53,7 @@ const HashMap = () => {
             return false;
         }
 
-        const idx = bucket.findIndex(([k, _v]) => deep_equal(k, key));
+        const idx = bucket.length === 1 ? 0 : bucket.findIndex(([k, _v]) => deep_equal(k, key));
         const removed = bucket.splice(idx, 1);
 
         if (removed && removed.length > 0) {
