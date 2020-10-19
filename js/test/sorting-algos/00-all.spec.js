@@ -49,4 +49,12 @@ describe("Sorting Algorithms Suite:", () => {
     test("bubble_sort(array) should return [] when called with no arguments", () => {
         expect(algos.BubbleSort()).toEqual([]);
     });
+    test("heap_sort(array) should work if array.length > 1, else should return array", () => {
+        const ordered = algos.HeapSort(random_order);
+        expect(ordered).toEqual(in_order);
+    });
+
+    test("heap_sort(array) should return [] when called with no arguments", () => {
+        expect(algos.HeapSort()).toEqual([]);
+    });
 });
