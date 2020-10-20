@@ -24,8 +24,8 @@ const swap = (array, idx, max) => {
 }
 
 const heap_sort = (unsorted = []) => {
-    if (!unsorted || !Array.isArray(unsorted) || unsorted.length <= 1) {
-        return [];
+    if (!Array.isArray(unsorted) || unsorted.length <= 1) {
+        return unsorted;
     }
 
     let array = [...unsorted];
