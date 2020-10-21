@@ -29,3 +29,5 @@ const merge_sort = (array = []) => {
         merge_sort(left), merge_sort(right)
     );
 }
+
+module.exports = merge_sort;

@@ -1,5 +1,5 @@
 const BinaryTree = require("../../src/data-structures/07-binary-tree");
-const max_level = require("../../src/data-structures/07-tree-helpers").max_level;
+const get_predeccessor = require("../../src/data-structures/07-tree-helpers").get_predeccessor;
 
 describe("Binary Tree Suite:", () => {
     const random_order = [1, 5, 6, 2, 3, 4, 18, 19, 0, 20, 10, 11, 12, 16, 17, 28, 29, 30, 7, 8, 9, 22, 23, 24, 13, 14, 15, 25, 26, 27, 21];
@@ -50,13 +50,29 @@ describe("Binary Tree Suite:", () => {
     test("tree.remove(key) should return true on success, else false", () => {
         const tree = BinaryTree();
 
-        console.log(`
+        console.log(`tree printing needs work.. 
+TODO:get max tree depth, fill 2D array/table with nulls,
+assign known values to table[row][column], get max value, get its string length
+print each node with as many chars as max to handle shifting..
          50  <-- delete by replacing with 40 or 60 (predecessor/successor and setting them as null)
        /    \\
      30       70
    /   \\     /   \\
- 20    40   60    80 <- leaf node, delete by assigning null to pointer of parent
+        40   60    80 <- leaf node, delete by assigning null to pointer of parent
  // when one child is null, replace with other child`);
+
+        const balanced = [20, 30, 40, 50, 60, 70];
+        balanced.forEach(v => tree.add(v, v));
+
+        console.log('TREE:\n\n', tree.print());
+
+        // root node with both children
+        expect(tree.remove(70)).toEqual(true);
+        expect(tree.remove(70)).toEqual(false);
+    });
+
+    test("tree.remove(key) should return true on success, else false", () => {
+        const tree = BinaryTree();
 
         const balanced = [20, 30, 40, 50, 60, 70, 80];
         balanced.forEach(v => tree.add(v, v));
@@ -69,16 +85,13 @@ describe("Binary Tree Suite:", () => {
         console.log('TREE -(50):\n\n', tree.print());
         expect(tree.getRoot().value).toEqual(60);
 
-        // leaf node
-        expect(tree.remove(80)).toEqual(true);
-        expect(tree.remove(80)).toEqual(false);
-        console.log('TREE -(80):\n', tree.print());
 
         // node with 1 child
         expect(tree.remove(60)).toEqual(true);
         expect(tree.remove(60)).toEqual(false);
         console.log('TREE -(60):\n', tree.print());
     });
+
 
     test("tree.traverse().in_order() should return values 1 by 1 in ascending order", () => {
         const tree = BinaryTree();
@@ -129,18 +142,27 @@ describe("Binary Tree Suite:", () => {
         expect(node.key).toEqual(root);
     });
 
-    test("tree.get_min() to return current root //needs work", () => {
+    test("tree.get_min() to return min value in subtree", () => {
         const tree = BinaryTree();
         random_order.forEach(v => tree.add(v));
 
         const min = 0;
         expect(tree.getMin().key).toEqual(min);
     });
-    test("tree.get_max() to return current root //needs work", () => {
+    test("tree.get_max() to return max value in subtree", () => {
         const tree = BinaryTree();
         random_order.forEach(v => tree.add(v));
 
         const max = 30;
         expect(tree.getMax().key).toEqual(max);
+    });
+
+    test("tree.get_predecessor() to return current root //needs work", () => {
+        const tree = BinaryTree();
+        random_order.forEach(v => tree.add(v));
+
+        const max = 30;
+        const root = tree.getRoot();
+        expect(get_predeccessor(root, root.right).predeccessor.key).toEqual(max);
     });
 });
