@@ -9,12 +9,13 @@ const HashMap = require('./06-hash-map');
 const Tree = require('./07-binary-tree');
 
 module.exports = {
-    BinaryTree: Tree,
-    DoublyLinkedList,
-    HashMap,
-    HashTable,
-    Map,
+    StaticArray,
     Stack,
     Queue,
-    LinkedList
+    Map,
+    HashMap,
+    HashTable,
+    BinaryTree: Tree,
+    LinkedList,
+    DoublyLinkedList
 };

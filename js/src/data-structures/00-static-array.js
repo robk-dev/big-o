@@ -1,6 +1,6 @@
 const deep_equal = require('deep-equal');
 
-const static_array = (capacity) => {
+const static_array = (capacity = 10) => {
     let arr = new Array(capacity);
     let length = 0;
 
@@ -22,6 +22,9 @@ const static_array = (capacity) => {
         set: (index, elem) => {
             arr[index] = elem;
         },
+        get: (index) => {
+            return arr[index];
+        },
         size: () => {
             return length;
         },
@@ -32,6 +35,7 @@ const static_array = (capacity) => {
             for (let i = 0; i < capacity; i++) {
                 arr[i] = null;
             }
+            length = 0;
         },
         removeAt: (index) => {
             if (index >= length || index < 0) throw new Error('index out of bounds');
@@ -48,7 +52,7 @@ const static_array = (capacity) => {
         },
         indexOf: (elem) => {
             for (let i = 0; i < length; i++) {
-                if (arr[i] === elem) {
+                if (deep_equal(arr[i], elem)) {
                     return i;
                 }
             }
@@ -64,7 +68,9 @@ const static_array = (capacity) => {
             return false;
         },
         contains: function (elem) {
-            return this.indexOf(elem);
+            return this.indexOf(elem) !== -1;
         }
     }
-}
+};
+
+module.exports = static_array;

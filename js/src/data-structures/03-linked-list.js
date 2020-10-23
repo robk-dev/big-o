@@ -115,14 +115,14 @@ const linked_list = () => {
 
     const toString = function () {
         let temp = head;
-        let str = "";
+        let str = "->";
 
         while (temp) {
-            str += "-" + temp.element;
+            str += `(${temp.element})->`;
             temp = temp.next;
         }
 
-        return str;
+        return str.slice(0, -2);
     };
 
     const iterator = () => {

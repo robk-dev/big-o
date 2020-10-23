@@ -70,6 +70,22 @@ describe("Doubly Linked List Suite:", () => {
         expect(ll.getHead().next.get()).toBe(2)
     });
 
+    test("Removing last element should update the tail", () => {
+        const ll = linked_list();
+        const arr = [0, 1, 2];
+        arr.forEach(item => ll.append(item));
+
+        const count = ll.count();
+        const old_tail = ll.getTail().get();
+
+        const el = ll.removeAt(2);
+        const new_tail = ll.getTail().get();
+
+        expect(old_tail).not.toBe(new_tail);
+        expect(ll.count()).toBe(count - 1);
+        expect(el).toBe(2);
+    });
+
 
     test("insertAt() should return true on success; else false", () => {
         const ll = linked_list();
@@ -106,7 +122,7 @@ describe("Doubly Linked List Suite:", () => {
 
         const arr = [0, 'a', 1, 'b', 2, 'c'];
         arr.forEach(item => ll.append(item));
-        const str = '-' + arr.join('-');
+        const str = '->(' + arr.join(')<->(') + ')<-';
 
         expect(ll.toString()).toEqual(str);
     });
@@ -125,6 +141,16 @@ describe("Doubly Linked List Suite:", () => {
 
         expect(new_arr).toEqual(arr);
     });
+
+    test("Linked list should iterate from tail when index is closer to it", () => {
+        const ll = linked_list();
+        const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+        arr.forEach(item => ll.append(item));
+
+        expect(ll.removeAt(9)).toEqual(arr[9]);
+    });
+
 });
 
 

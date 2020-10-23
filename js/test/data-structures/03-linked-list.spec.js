@@ -106,7 +106,7 @@ describe("Linked List Suite:", () => {
 
         const arr = [0, 'a', 1, 'b', 2, 'c'];
         arr.forEach(item => ll.append(item));
-        const str = '-' + arr.join('-');
+        const str = '->(' + arr.join(')->(') + ')';
 
         expect(ll.toString()).toEqual(str);
     });

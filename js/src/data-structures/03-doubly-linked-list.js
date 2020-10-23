@@ -41,6 +41,7 @@ const doubly_linked_list = () => {
             tail = node;
         }
         length++;
+        return true;
     };
 
     const prepend = (element) => {
@@ -63,7 +64,6 @@ const doubly_linked_list = () => {
 
         const node = new Node(element);
         let temp = head;
-        let prev;
         let index = 0;
 
         if (pos === 0) {
@@ -82,42 +82,89 @@ const doubly_linked_list = () => {
         return true;
     };
 
+    const removeFirst = () => {
+        let temp = head;
+
+        temp.next.prev = null;
+        head = temp.next;
+
+        const data = temp.element;
+
+        temp = temp.next = temp.element = null;
+        length--;
+
+        return data;
+    };
+
+    const removeLast = () => {
+        let temp = tail;
+
+        tail.prev.next = null;
+        tail = temp.prev;
+
+        const data = temp.element;
+
+        temp = temp.prev = temp.element = null;
+        length--;
+
+        return data;
+    };
+
+    const removeNode = function (node) {
+        if (node.prev === null) {
+            return removeFirst();
+        }
+        if (node.next == null) {
+            return removeLast();
+        }
+
+        node.next.prev = node.prev;
+        node.prev.next = node.next;
+
+        const data = node.element;
+        node = node.next = node.prev = node.element = null;
+
+        length--;
+        return data;
+    };
+
     const removeAt = function (pos) {
         if (pos < 0 || pos >= length || !head) {
             return null;
         }
 
-        let temp = head;
-        let prev;
+        let temp;
         let index = 0;
 
         if (pos === 0) {
-            head = temp.next;
-        } else {
+            return removeFirst();
+        }
+
+        if (pos === length - 1) {
+            return removeLast();
+        }
+
+        if (pos < length / 2) {
+            temp = head;
             while (index++ < pos) {
                 temp = temp.next;
             }
 
-            temp.prev.next = temp.next; // swap
-            temp.next.prev = temp.prev.prev;
-        }
+        } else {
+            temp = tail;
+            index = length;
+            while (--index > pos) {
+                temp = temp.prev;
+            }
 
-        length--;
-        return temp.get();
+        }
+        return removeNode(temp);
     };
 
     const remove = function (element) {
         const index = indexOf(element)
         return removeAt(index);
     };
-
-    const peek = {
-        first: () => {
-            return head;
-        }, last: () => {
-            return tail;
-        }
-    }
 
     const indexOf = function (element) {
         let temp = head;
@@ -138,11 +185,11 @@ const doubly_linked_list = () => {
         let str = "->";
 
         while (temp) {
-            str += "<->" + `(${temp.element})`;
+            str += `(${temp.element})<->`;
             temp = temp.next;
         }
 
-        return str + '<-';
+        return str.slice(0, -3) + '<-';
     };
 
     const iterator = () => {
@@ -157,7 +204,7 @@ const doubly_linked_list = () => {
 
     return {
         [Symbol.iterator]: iterator,
-        getHead, getTail, isEmpty, count, append, prepend, peek, insertAt, remove, removeAt, indexOf, toString
+        getHead, getTail, isEmpty, count, append, prepend, insertAt, remove, removeAt, indexOf, toString
     };
 };
 
