@@ -1,3 +1,4 @@
+const BinarySearch = require('./00-binary-search');
 const InsertionSort = require('./01-insertion-sort');
 const MergeSort = require('./02-merge-sort');
 const QuickSort = require('./03-quick-sort');
@@ -6,6 +7,7 @@ const HeapSort = require('./05-heap-sort');
 const SelectionSort = require('./06-selection-sort');
 
 module.exports = {
+    BinarySearch,
     BubbleSort,
     HeapSort,
     InsertionSort,

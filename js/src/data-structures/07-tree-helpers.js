@@ -45,7 +45,7 @@ const get_successor = (root, _node) => {
         parent = temp;
         temp = temp.left
     }
-    return { successor: temp, parent };
+    return { successor: temp, parent }; 
 }
 
 const get_predeccessor = (root, _node) => {
@@ -116,10 +116,10 @@ const _traverse = (root) => {
         }
     }
 
-    const breadth_first = (_node, callback) => {
+    const post_order = (_node, callback) => {
         if (_node) {
-            breadth_first(_node.left, callback);
-            breadth_first(_node.right, callback);
+            post_order(_node.left, callback);
+            post_order(_node.right, callback);
             callback && callback(_node);
         }
     }
@@ -132,7 +132,7 @@ const _traverse = (root) => {
             pre_order(root, callback, cb);
         },
         post_order: (callback) => {
-            breadth_first(root, callback);
+            post_order(root, callback);
         }
     };
 };

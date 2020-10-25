@@ -1,5 +1,5 @@
 const DataStructures = require('../data-structures');
-const SortingAlgos = require('../sorting-algos');
+const SortingAlgos = require('../algos/sorting-algos');
 
 module.exports = {
     DataStructures,

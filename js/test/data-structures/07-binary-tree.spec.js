@@ -91,6 +91,24 @@ print each node with as many chars as max to handle shifting..
         expect(tree.remove(60)).toEqual(false);
         console.log('TREE -(60):\n', tree.print());
     });
+    // TODO: FIX
+    // test("tree.remove(key) should return true on success, else false", () => {
+    //     const tree = BinaryTree();
+
+    //     const balanced = [20, 30, 40, 50, 60, 70, 80];
+    //     balanced.forEach(v => tree.add(v, v));
+
+    //     console.log('TREE:\n\n', tree.print());
+    //     expect(tree.remove(20)).toEqual(true);
+    //     expect(tree.remove(20)).toEqual(false);
+    //     console.log('TREE -(20):\n\n', tree.print());
+    //     expect(tree.remove(70)).toEqual(true);
+    //     console.log('TREE -(70):\n\n', tree.print());
+        
+    //     expect(tree.remove(30)).toEqual(true);
+    //     console.log('TREE -(30):\n\n', tree.print());
+    //     expect(tree.remove(30)).toEqual(false);
+    // });
 
 
     test("tree.traverse().in_order() should return values 1 by 1 in ascending order", () => {
